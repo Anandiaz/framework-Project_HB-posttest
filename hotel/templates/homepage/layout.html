@@ -1,0 +1,101 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <title>{% block title %} Hotel {% endblock title %}</title>
+    {% load django_bootstrap5 %} {% bootstrap_css %}
+</head>
+<body>
+    {% comment %} Navbar  {% endcomment %}
+    <nav class="navbar navbar-expand-lg navbar-light bg-light" id="navbar">
+        <div class="container-fluid">
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="#">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Features</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Pricing</a>
+              </li>
+            </ul>
+          </div>
+          <form class="d-flex">
+            <button class="btn btn-outline-dark mx-1" type="submit">Sign in</button>
+            <button class="btn btn-dark mx-1" type="submit">Sign up</button>
+          </form>
+        </div>
+      </nav>
+      {% comment %} Hero {% endcomment %}
+      <div class="container-fluid" id="hero"> 
+        <img src="{{ MEDIA_URL }}img/Hero.jpg" class="img-fluid" alt="Hero Image">
+        <div class="fading-gradient lexend" id="contentHero">
+          <h1>Book your hotel now</h1>
+          <br>
+          <div class="container bg-light bg-gradient p-3 rounded-4" >
+            <div class="row">
+              <form class="d-flex justify-content-evenly" role="search">
+                <input class="form-control mx-2" type="search" placeholder="Search" aria-label="Search" style="width: 500px;">
+                <div class="input-group me-2" style="width: 300px;">
+                    <input type="date" class="form-control" placeholder="Start Date" aria-label="Start Date">
+                    <input type="date" class="form-control" placeholder="End Date" aria-label="End Date">
+                </div>
+                <div class="dropdown me-2">
+                  <button class="btn btn-dark dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Room & Guest
+                  </button>
+                  <ul class="dropdown-menu p-2">
+                    <li><input class="form-control" type="number" placeholder="Room" id="Room"></li>
+                    <li><input class="form-control" type="number" placeholder="Guest" id="Guest"></li>
+                  </ul>
+                </div>
+                <button class="btn btn-dark me-2" type="submit" style="width: 150px;">Search</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {% comment %} Content {% endcomment %}
+      <div class="container-fluid" id="catalog">
+        <h2>Popular Places</h2>
+        <div class="d-flex justify-content-between mt-5">
+          <div class="card" style="width: 25rem;">
+            <img src="{{ MEDIA_URL }}img/Hotel1.jpg" class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title">Balaraja Hotel</h5>
+              <p class="card-text">Denpasar, Bali</p>
+              <p class="card-text">IDR 650.000 / Night</p>
+              <a href="#" class="btn btn-dark">Book now</a>
+            </div>
+          </div>
+          <div class="card" style="width: 25rem;">
+            <img src="{{ MEDIA_URL }}img/Hotel2.jpg" class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title">7 Seas Hotel</h5>
+              <p class="card-text">Denpasar, Bali</p>
+              <p class="card-text">IDR 650.000 / Night</p>
+              <a href="#" class="btn btn-dark">Book now</a>
+            </div>
+          </div>
+          <div class="card" style="width: 25rem;">
+            <img src="{{ MEDIA_URL }}img/Hotel3.jpg" class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title">Crimson Moon Hotel</h5>
+              <p class="card-text">Denpasar, Bali </p>
+              <p class="card-text">IDR 650.000 / Night</p>
+              <a href="#" class="btn btn-dark">Book now</a>
+            </div>
+          </div>
+        </div>
+      </div>
+       
+      <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
