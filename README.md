@@ -16,3 +16,25 @@
 ![Seed_hotel](Screenshoot_Web/Seed_Hotel.png)
 ![Seed_room](Screenshoot_Web/Seed_Room.png)
 ![Seed_user](Screenshoot_Web/Seed_User.png)
+
+# Posttest 3
+## Tabel di dalam Admin
+![Tabel_Booking](Screenshoot_Web/TabelAdmin_Booking.png)
+![Tabel_Hotel](Screenshoot_Web/TabelAdmin_Hotel.png)
+![Tabel_Room](Screenshoot_Web/TabelAdmin_Room.png)
+![Tabel_User](Screenshoot_Web/TabelAdmin_User.png)
+
+## Form di dalam Admin
+![Form_Booking](Screenshoot_Web/FormAdmin_Booking.png)
+![Form_Hotel](Screenshoot_Web/FormAdmin_Hotel.png)
+![Form_Room](Screenshoot_Web/FormAdmin_Room.png)
+![Form_User](Screenshoot_Web/FormAdmin_User.png)
+
+# Custom
+![Custom_Code](Screenshoot_Web/Custom_Code.png)
+
+- untuk variabel list_display itu buat nentukan kolom yang akan ditampilkan
+- disini kita juga mengoveride fungsi 'save_model' agar bisa ditambahkan logika custom
+- untuk 'obj.user.email' digunakan untuk mengambil objek pemesanan
+- untuk 'get_or_create' digunakan untuk memeriksa apakah pengguna dengan email yang sudah ada di database
+- untuk codingan dibawah 'admin.site.register' itu digunakan untuk mendaftarkan Model
