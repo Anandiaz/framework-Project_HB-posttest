@@ -1,0 +1,58 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/booking.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <title>{% block title %} Booking {% endblock title %}</title>
+    {% load django_bootstrap5 %} 
+    {% bootstrap_css %}
+</head>
+<body>
+    {% include "includes/navbar.html" %}
+
+    <div class="container mt-4 pt-4 pb-4 bg-white shadow-sm rounded border">
+        <h1 class="text-center mb-4">Book Your Stay at {{ hotel.Name }}</h1>
+
+        <form method="POST" action="">
+            {% csrf_token %}
+            
+            <!-- Start Date Input -->
+            <div class="input-group input-group-lg my-3">
+                <label for="start_date" class="form-label">Check-In Date:</label> 
+                <input type='date' id='start_date' name='start_date' value="{{ form.start_date.value|default_if_none:'' }}" required />
+            </div>
+         
+            <!-- End Date Input -->
+            <div class="input-group input-group-lg my-3">
+                <label for="end_date" class="form-label">Check-Out Date:</label> 	
+                <input type='date' id='end_date' name='end_date' value="{{ form.end_date.value|default_if_none:'' }}" required />
+            </div>
+         
+            <!-- Room Count Input -->
+            <label for="room_count" class="form-label">Number of Rooms:</label>
+            <input type='number' id='room_count' name='room_count' value="{{ form.room_count.value|default_if_none:'1' }}" required />
+            <br>
+         
+            <!-- Guest Count Input -->
+            <label for="guest_count" class="form-label">Number of Guests:</label>
+            <input type='number' id='guest_count' name='guest_count' value="{{ form.guest_count.value|default_if_none:'1' }}" required />
+            <br>
+         
+            <!-- Submit Button -->
+            <button class='btn btn-dark me-auto' type='submit'>Submit Booking</button>
+         
+            <!-- Display Error Messages (if any) -->
+            <ul style='list-style-type:none;padding-left:20px;'>
+                <li style='color:red;'>{{ form.non_field_errors }}</li>
+            </ul>
+         
+            <!-- Display Success Message (after submission) -->
+            <p>{{ success_message }}</p>
+         </form>
+    </div>
+</body>
+</html>

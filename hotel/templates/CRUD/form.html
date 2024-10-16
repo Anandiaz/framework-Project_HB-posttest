@@ -1,0 +1,46 @@
+{% csrf_token %}
+    
+<!-- Name Field -->
+<div class="mb-3">
+    <label for="id_Name" class="form-label">Name</label>
+    <input type="text" class="form-control" id="id_Name" name="Name" value="{{ form.Name.value|default_if_none:'' }}" required>
+    <div class="invalid-feedback">{{ form.Name.errors }}</div>
+</div>
+
+<!-- Location Field -->
+<div class="mb-3">
+    <label for="id_Location" class="form-label">Location</label>
+    <input type="text" class="form-control" id="id_Location" name="Location" value="{{ form.Location.value|default_if_none:'' }}" required>
+    <div class="invalid-feedback">{{ form.Location.errors }}</div>
+</div>
+
+<!-- Description Field -->
+<div class="mb-3">
+    <label for="id_Description" class="form-label">Description</label>
+    <textarea class="form-control" id="id_Description" name="Description" required>{{ form.Description.value|default_if_none:'' }}</textarea>
+    <div class="invalid-feedback">{{ form.Description.errors }}</div>
+</div>
+
+<!-- Star Rating Field -->
+<div class="mb-3">
+    <label for="id_StarRating" class="form-label">Star Rating</label>
+    <input type="number" class="form-control" id="id_StarRating" name="StarRating" value="{{ form.StarRating.value|default_if_none:'' }}" required min="1" max="5">
+    <div class="invalid-feedback">{{ form.StarRating.errors }}</div>
+</div>
+
+<!-- Amenities Field -->
+<div class="mb-3">
+    <label for="id_Amenities" class="form-label">Amenities</label>
+    <textarea class="form-control" id="id_Amenities" name="Amenities" required>{{ form.Amenities.value|default_if_none:'' }}</textarea>
+    <div class="invalid-feedback">{{ form.Amenities.errors }}</div>
+</div>
+
+<!-- Contact Info Field -->
+<div class="mb-3">
+    <label for="id_ContactInfo" class="form-label">Contact Info</label>
+    <input type="text" class="form-control" id="id_ContactInfo" name="ContactInfo" value="{{ form.ContactInfo.value|default_if_none:'' }}" required>
+    <div class="invalid-feedback">{{ form.ContactInfo.errors }}</div>
+</div>
+
+<!-- Submit Button -->
+<button type="submit" class="btn btn-primary">Save</button>

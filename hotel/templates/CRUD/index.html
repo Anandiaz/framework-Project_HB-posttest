@@ -1,0 +1,124 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="{% static 'css/booking.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <title>{% block title %} Booking {% endblock title %}</title>
+    {% load django_bootstrap5 %} 
+    {% bootstrap_css %}
+</head>
+<body>
+    {% include "includes/navbar.html" %}
+    
+    <div class="container mt-4">
+        {% if messages %}
+            <div>
+                {% for message in messages %}
+                    <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                        {{ message }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    </div>
+
+    <div class="container mt-5">
+        <h1 class="mb-4">Hotel List</h1>
+        <a href="{% url 'hotel_create' %}" class="btn btn-dark">Tambah Hotel</a>
+        <form method="GET" action="{% url 'crud' %}" class="d-flex mb-3 mt-3">
+            <input class="form-control me-2" type="search" name="q" placeholder="Cari hotel..." value="{{ query|default:'' }}" aria-label="Search">
+            <button class="btn btn-outline-success" type="submit">Cari</button>
+        </form>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Hotel ID</th>
+                    <th>Name</th>
+                    <th>Location</th>
+                    <th>Description</th>
+                    <th>Star Rating</th>
+                    <th>Amenities</th>
+                    <th>Contact Info</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for hotel in hotels %}
+                <tr>
+                    <td>{{ hotel.HotelID }}</td>
+                    <td>{{ hotel.Name }}</td>
+                    <td>{{ hotel.Location }}</td>
+                    <td>{{ hotel.Description }}</td>
+                    <td>{{ hotel.StarRating }}</td>
+                    <td>{{ hotel.Amenities }}</td>
+                    <td>{{ hotel.ContactInfo }}</td>
+                    <td>
+                        <a href="{% url 'hotel_update' hotel.HotelID %}" class="btn btn-sm btn-warning">Ubah</a>
+                        <button class="btn btn-sm btn-danger" onclick="confirmDelete({{ hotel.HotelID }})">Hapus</button>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="8" class="text-center">No hotels available.</td> <!-- Message if no hotels -->
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <!-- SweetAlert2 script -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <!-- Confirm Delete Function -->
+    <script>
+        function confirmDelete(hotel_id) {
+            Swal.fire({
+                title: 'Data hotel akan dihapus',
+                text: 'Data tidak akan bisa dikembalikan!',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Ya, Hapus!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    fetch(`/crud/delete/${hotel_id}`, {
+                        method: 'POST',
+                        headers: {
+                            'X-CSRFToken': '{{ csrf_token }}'
+                        }
+                    }).then(response => response.json()).then(data => {
+                        if (data.success) {
+                            Swal.fire(
+                                'Deleted!',
+                                'Hotel has been deleted.',
+                                'success'
+                            ).then(() => {
+                                window.location.reload();
+                            });
+                        } else {
+                            Swal.fire(
+                                'Error!',
+                                'There was an issue deleting the Hotel.',
+                                'error'
+                            );
+                        }
+                    }).catch(error => {
+                        Swal.fire(
+                            'Network Error!',
+                            'Please try again later.',
+                            'error'
+                        );
+                        console.error('Error:', error);
+                    });
+                }
+            });
+        }
+        </script>
+</body>
+</html>

@@ -1,0 +1,38 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <title>Booking Confirmation</title>
+</head>
+<body>
+    <h1>Booking Confirmation</h1>
+    
+    <div class="container mt-4">
+        <h2>Your Booking Details</h2>
+        
+        <!-- Display booking details here -->
+        <p><strong>Hotel:</strong> {{ hotel.Name }}</p>
+        <p><strong>Location:</strong> {{ hotel.Location }}</p>
+        <p><strong>Check-in Date:</strong> {{ start_date }}</p>
+        <p><strong>Check-out Date:</strong> {{ end_date }}</p>
+        <p><strong>Rooms:</strong> {{ room_count }}</p>
+        <p><strong>Guests:</strong> {{ guest_count }}</p>
+
+        <!-- Optionally add a button to confirm the booking -->
+        <form method="POST" action="{% url 'confirm_booking' %}">
+            {% csrf_token %}
+            <!-- Include hidden fields for necessary data -->
+            <input type="hidden" name="hotel_id" value="{{ hotel.id }}">
+            <input type="hidden" name="start_date" value="{{ start_date }}">
+            <input type="hidden" name="end_date" value="{{ end_date }}">
+            <input type="hidden" name="room_count" value="{{ room_count }}">
+            <input type="hidden" name="guest_count" value="{{ guest_count }}">
+            
+            <button type="submit" class="btn btn-success">Confirm Booking</button>
+        </form>
+    </div>
+</body>
+</html>

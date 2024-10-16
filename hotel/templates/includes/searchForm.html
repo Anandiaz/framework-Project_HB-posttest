@@ -1,0 +1,21 @@
+<form class="d-flex justify-content-evenly" method="GET" action="{% url 'booking_index' %}">
+    {% csrf_token %}
+    <input class="form-control mx-2" type="text" name="q" placeholder="Search by Location" aria-label="Search" style="width: 500px;" value="{{ request.GET.q|default:'' }}">
+    
+    <div class="input-group me-2" style="width: 300px;">
+        <input type="date" class="form-control" name="start_date" placeholder="Start Date" aria-label="Start Date" value="{{ request.GET.start_date|default:'' }}">
+        <input type="date" class="form-control" name="end_date" placeholder="End Date" aria-label="End Date" value="{{ request.GET.end_date|default:'' }}">
+    </div>
+    
+    <div class="dropdown me-2">
+        <button class="btn btn-dark dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Room & Guest
+        </button>
+        <ul class="dropdown-menu p-2">
+            <li><input class="form-control" type="number" name="room_count" placeholder="Room" id="Room" value="{{ request.GET.room_count|default:1 }}"></li>
+            <li><input class="form-control" type="number" name="guest_count" placeholder="Guest" id="Guest" value="{{ request.GET.guest_count|default:1 }}"></li>
+        </ul>
+    </div>
+    
+    <button class="btn btn-dark me-2" type="submit" style="width: 150px;">Search</button>
+</form>

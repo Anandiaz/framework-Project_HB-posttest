@@ -38,3 +38,15 @@
 - untuk 'obj.user.email' digunakan untuk mengambil objek pemesanan
 - untuk 'get_or_create' digunakan untuk memeriksa apakah pengguna dengan email yang sudah ada di database
 - untuk codingan dibawah 'admin.site.register' itu digunakan untuk mendaftarkan Model
+
+# Posttest 4
+## Tampilan Tabel
+![CRUD_Table](Screenshoot_Web/CRUD_Table.png)
+
+## Tampilan Form
+![CRUD_Tambah](Screenshoot_Web/CRUD_Tambah.png)
+![CRUD_Tambah2](Screenshoot_Web/CRUD_Tambah2.png)
+
+## Tampilan Hapus Data
+![CRUD_Hapus](Screenshoot_Web/CRUD_Hapus.png)
+![CRUD_Hapus2](Screenshoot_Web/CRUD_Hapus2.png)
